@@ -1,4 +1,4 @@
-import { readFileSync } from 'fs';
+import { readFileSync } from 'node:fs';
 import { FileReader } from './file-reader.interface.js';
 import { Offer, OfferTypeEnum, CoordinatesType } from '../../types/offer.type.js';
 import { CityType, CityName, Cities } from '../../types/city.type.js';
@@ -51,13 +51,13 @@ export class TSVFileReader implements FileReader {
       rating: parseFloat(rating),
       type: type as OfferTypeEnum,
       roomsCount: Number.parseInt(roomsCount, 10),
-      guestsQuantity: Number.parseInt(guestsQuantity),
+      guestsQuantity: Number.parseInt(guestsQuantity, 10),
       price: Number.parseFloat(price),
       facilities: this.parseFacilities(facilities),
       offerAuthor: this.parseOfferAuthor(offerAuthor),
-      commentsCount: Number.parseInt(commentsCount),
+      commentsCount: Number.parseInt(commentsCount, 10),
       coordinates: this.parseCoordinates(coordinates)
-    }
+    };
   }
 
   private parseOfferAuthor(author: string): User {
@@ -70,7 +70,7 @@ export class TSVFileReader implements FileReader {
       avatar,
       password,
       type: type as UserType,
-    }
+    };
   }
 
   private parseCoordinates(str: string): CoordinatesType {
@@ -79,7 +79,7 @@ export class TSVFileReader implements FileReader {
     return {
       latitude: Number.parseFloat(latitude),
       longitude: Number.parseFloat(longitude),
-    }
+    };
   }
 
   private parseFacilities(facilities: string): string[] {
@@ -97,7 +97,7 @@ export class TSVFileReader implements FileReader {
       return {
         name: parseCity,
         coordinates: Cities[parseCity],
-      }
+      };
     }
 
     return {
@@ -106,7 +106,7 @@ export class TSVFileReader implements FileReader {
         latitude: 0,
         longitude: 0,
       }
-    }
+    };
   }
 
   private parsePhotos(parsePhotos: string): string[] {

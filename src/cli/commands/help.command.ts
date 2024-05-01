@@ -3,7 +3,7 @@ import { Command } from './command.interface.js';
 
 export class HeplCommand implements Command {
   public getName(): string {
-      return '--help';
+    return '--help';
   }
 
   public async execute(..._parametres: string[]): Promise<void> {

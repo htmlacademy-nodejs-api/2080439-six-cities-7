@@ -33,19 +33,19 @@ export class VersionCommand implements Command {
   }
 
   public getName(): string {
-      return '--version';
+    return '--version';
   }
 
   public async execute(..._parametres: string[]): Promise<void> {
-      try {
-        const version = this.readVersion();
-        console.info(version);
-      } catch (error: unknown) {
-        console.error(`Failed to read version from ${this.filePath}`);
+    try {
+      const version = this.readVersion();
+      console.info(version);
+    } catch (error: unknown) {
+      console.error(`Failed to read version from ${this.filePath}`);
 
-        if (error instanceof Error) {
-          console.error(error.message);
-        }
+      if (error instanceof Error) {
+        console.error(error.message);
       }
+    }
   }
 }

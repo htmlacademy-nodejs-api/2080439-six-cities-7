@@ -10,7 +10,7 @@ export enum CityName {
   Amsterdam = 'Amsterdam',
   Hamburg = 'Hamburg',
   Dusseldorf = 'Dusseldorf',
-};
+}
 
 export type CityType = {
   name: CityName;

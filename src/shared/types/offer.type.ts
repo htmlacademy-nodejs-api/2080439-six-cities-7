@@ -8,6 +8,16 @@ export enum OfferTypeEnum {
   Hotel = 'hotel',
 }
 
+export enum FacilitiesEnum {
+  Breakfast = 'Breakfast',
+  AirConditioning = 'Air conditioning',
+  LaptopFriendlyWorkspace = 'Laptop friendly workspace',
+  BabySeat = 'Baby seat',
+  Washer = 'Washer',
+  Towels = 'Towels',
+  Fridge = 'Fridge'
+}
+
 export type CoordinatesType = {
   latitude: number;
   longitude: number;
@@ -27,7 +37,7 @@ export type Offer = {
   roomsCount: number;
   guestsQuantity: number;
   price: number;
-  facilities: string[],
+  facilities: Array<FacilitiesEnum>,
   offerAuthor: User,
   commentsCount: number,
   coordinates: CoordinatesType,

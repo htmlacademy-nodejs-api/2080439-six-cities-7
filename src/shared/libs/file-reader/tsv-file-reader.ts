@@ -59,14 +59,12 @@ export class TSVFileReader extends EventEmitter implements FileReader {
   }
 
   private parseOfferAuthor(author: string): User {
-    const [name, id, mail, avatar, password, type] = author.split(';');
+    const [name, mail, avatar, type] = author.split(';');
 
     return {
       name,
-      id: Number.parseInt(id, 10),
       mail,
       avatar,
-      password,
       type: type as UserType,
     };
   }
@@ -126,12 +124,14 @@ export class TSVFileReader extends EventEmitter implements FileReader {
       remainingData += chunk.toString();
 
       while ((nextLinePosition = remainingData.indexOf('\n')) >= 0) {
-        const completeRow = remainingData.slice(0, nextLinePosition = 1);
+        const completeRow = remainingData.slice(0, nextLinePosition + 1);
         remainingData = remainingData.slice(++nextLinePosition);
         importedRowCount++;
 
         const parsedOffer = this.parseLineToOffer(completeRow);
-        this.emit('line', parsedOffer);
+        await new Promise((resolve) => {
+          this.emit('line', parsedOffer, resolve);
+        });
       }
     }
 
